@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Proyecto2018;
+using ProyectoIndividualNet.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -9,17 +12,17 @@ namespace ProyectoIndividualNet.Repository
     {
         public Pelicula Create(Pelicula pelicula)
         {
-            return ApplicationDbContext.applicationDbContext.Pelicula.Add(pelicula);
+            return ApplicationDbContext.applicationDbContext.Peliculas.Add(pelicula);
         }
 
         public Pelicula Get(long id)
         {
-            return ApplicationDbContext.applicationDbContext.Pelicula.Find(id);
+            return ApplicationDbContext.applicationDbContext.Peliculas.Find(id);
         }
 
         public IQueryable<Pelicula> Get()
         {
-            IList<Pelicula> lista = new List<Pelicula>(ApplicationDbContext.applicationDbContext.Pelicula);
+            IList<Pelicula> lista = new List<Pelicula>(ApplicationDbContext.applicationDbContext.Peliculas);
 
             return lista.AsQueryable();
         }
@@ -27,7 +30,7 @@ namespace ProyectoIndividualNet.Repository
 
         public void Put(Pelicula pelicula)
         {
-            if (ApplicationDbContext.applicationDbContext.Pelicula.Count(e => e.Id == pelicula.Id) == 0)
+            if (ApplicationDbContext.applicationDbContext.Peliculas.Count(e => e.Id == pelicula.Id) == 0)
             {
                 throw new NoEncontradoException("No he encontrado la entidad");
             }
@@ -36,13 +39,13 @@ namespace ProyectoIndividualNet.Repository
 
         public Pelicula Delete(long id)
         {
-            Pelicula pelicula = ApplicationDbContext.applicationDbContext.Pelicula.Find(id);
+            Pelicula pelicula = ApplicationDbContext.applicationDbContext.Peliculas.Find(id);
             if (pelicula == null)
             {
                 throw new NoEncontradoException("No he encontrado la entidad");
             }
 
-            ApplicationDbContext.applicationDbContext.Pelicula.Remove(pelicula);
+            ApplicationDbContext.applicationDbContext.Peliculas.Remove(pelicula);
             return pelicula;
         }
     }

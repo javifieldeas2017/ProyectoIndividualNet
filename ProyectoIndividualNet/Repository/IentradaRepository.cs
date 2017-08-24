@@ -2,7 +2,7 @@
 
 namespace ProyectoIndividualNet.Repository
 {
-    public interface IentradaRepository
+    public interface IEntradaRepository
     {
         Entrada Create(Entrada entrada);
         Entrada Delete(long id);

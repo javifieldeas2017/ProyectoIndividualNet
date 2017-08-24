@@ -1,24 +1,28 @@
-﻿using System;
+﻿using Proyecto2018;
+using ProyectoIndividualNet.Models;
+using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
 namespace ProyectoIndividualNet.Repository
 {
-    public class entradaRepository : IentradaRepository
+    public class EntradaRepository : IEntradaRepository
+    {
         public Entrada Create(Entrada entrada)
         {
-            return ApplicationDbContext.applicationDbContext.entrada.Add(entrada);
+            return ApplicationDbContext.applicationDbContext.Entradas.Add(entrada);
         }
 
         public Entrada Get(long id)
         {
-            return ApplicationDbContext.applicationDbContext.entrada.Find(id);
+            return ApplicationDbContext.applicationDbContext.Entradas.Find(id);
         }
 
         public IQueryable<Entrada> Get()
         {
-            IList<Entrada> lista = new List<Entrada>(ApplicationDbContext.applicationDbContext.entrada);
+            IList<Entrada> lista = new List<Entrada>(ApplicationDbContext.applicationDbContext.Entradas);
 
             return lista.AsQueryable();
         }
@@ -26,7 +30,7 @@ namespace ProyectoIndividualNet.Repository
 
         public void Put(Entrada entrada)
         {
-            if (ApplicationDbContext.applicationDbContext.entrada.Count(e => e.Id == entrada.Id) == 0)
+            if (ApplicationDbContext.applicationDbContext.Entradas.Count(e => e.Id == entrada.Id) == 0)
             {
                 throw new NoEncontradoException("No he encontrado la entidad");
             }
@@ -35,13 +39,13 @@ namespace ProyectoIndividualNet.Repository
 
         public Entrada Delete(long id)
         {
-            Entrada entrada = ApplicationDbContext.applicationDbContext.entrada.Find(id);
+            Entrada entrada = ApplicationDbContext.applicationDbContext.Entradas.Find(id);
             if (entrada == null)
             {
                 throw new NoEncontradoException("No he encontrado la entidad");
             }
 
-            ApplicationDbContext.applicationDbContext.entrada.Remove(entrada);
+            ApplicationDbContext.applicationDbContext.Entradas.Remove(entrada);
             return entrada;
         }
     }
